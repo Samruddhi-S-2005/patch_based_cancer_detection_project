@@ -1,0 +1,375 @@
+Major Project
+
+Patch-Based Unimodal Cancer Anomaly Detection in tissue Images Using Deep Learning Models
+
+Literature Surveys:
+* platforms-google scholar,arXiv,SciSpace
+* SciSpace- SciSpace is an AI-powered platform for reading, understanding, and managing research papers.
+
+Description of topic:
+#Cancer Detection in Tissue Images:
+-Doctors take a small tissue sample (biopsy) from a patient. That tissue is viewed under a microscope and converted into digital images. These images are called: Histopathology Images
+-Doctors normally look at them manually to identify cancer cells.
+But this process:
+takes time
+depends on doctor experience
+sometimes errors happen
+So researchers build AI models to help doctors detect cancer automatically.
+
+#What is patch-based?:
+-Tissue images are very large.ex-5000X5000 pixels, A neural network cannot process such a large image directly. So the image is divided into small pieces called: Patches
+-Each patch may contain:
+normal tissue
+abnormal tissue (cancer)
+The AI model studies each patch separately.
+
+#What is Anomaly Detection?:
+-Anomaly means: Something abnormal / unusual
+Example: Normal tissue cells → regular pattern
+Cancer tissue cells → irregular pattern
+-So the AI model tries to detect:
+normal pattern vs abnormal pattern
+-If abnormal → possible cancer.
+
+#What is Unimodal?:
+-In AI research, modalities mean data types. Ex- image, text, audio.
+-This project uses only images, hence called Unimodal(Single data type)
+
+#What is Deep Learning Model?:
+-Deep learning models are neural networks. The most common model used for images is: CNN – Convolutional Neural Network
+-CNN learns patterns like:
+shapes
+textures
+colors
+cell structures
+
+--a black box model is a system where for an input model gives output but we don't know how the model made the decision inside, hence the need of explainable ai.
+ 
+Datasets:
+BreakHis Dataset(for breast cancer histopathology images)[img sizes- 700X460 pixels] - https://www.kaggle.com/datasets/ambarish/breakhis
+PatchCamelyon Dataset-> strong recommendation (best for patch-based detection)[img sizes-96X96 pixels][labels 0-normal, 1-tumor]-https://www.kaggle.com/datasets/andrewmvd/metastatic-tissue-classification-patchcamelyon?utm_source=chatgpt.com
+CAMELYON16 Dataset(advanced research dataset)[wsi] - https://camelyon16.grand-challenge.org/
+--what is dataset?-A collection of images + labels used to train and test your model
+--most datasets like Camelyon,BreakHis etc are real, collected from real hospitals, used in actual research papers, medically validated.
+--most of the datasets are free to download-Kaggle, Grand Challenge(Camelyon),TCGA portal
+---- datasets we are using: TCGA https://portal.gdc.cancer.gov/  ,  Camelyon16 https://camelyon16.grand-challenge.org/
+--WSI data, which are labelled as normal and tumor in slide level itself, i.e., weak supervision(so that no need to label in patch level all patches under a labeled slide is considered as that label)-this reduces time , reduces work complexity, reduces manual labeling. best for our project.
+
+
+More about topic:
+#Benefits of unimodal:
+Simpler to implement
+less data required
+faster training
+
+#Deep Learning Models:
+-Deep learning is a part of AI where models learn from data using Neural Networks
+-cancer patterns are complex, traditional methods fail, hence deep learning can learn patterns automatically
+-types: mainly CNN, ResNet, DenseNet, EfficientNet
+*CNN: convolutional Neural Network
+	-used for image processing.
+	-it takes input tissue image-> find features like edges shapes, 	textures -> reduce image size -> makes decision-Cancer/Normal
+	- it is important because it is the backbone of your entire project
+-we will be initially using efficientnet as base model, then compare with resnet and densenet. efficientnet is a pretrained model, it is pretrained on imagenet dataset(transfer learning), we use that model to train to adjust to our data, hence efficientnet is the best model to start with, and its f1score is usually more compared to resnet and densenet.
+-Transfer learning means using a model that is already trained on a large dataset and adapting it for your task.
+
+#WSI:
+WSI-Whole Slide Images
+-very large tissue images
+-sources: CAMELYON16(official dataset, contains wsi), TCGA(multiple cancer types)-https://portal.gdc.cancer.gov/
+-WSI are very large(GB size), hard to process so beginners usually use patch datasets.
+-A Whole Slide Image (WSI) is a very large high-resolution scan of an entire tissue slide. Size can be 10,000 × 10,000 pixels or more. File size can be hundreds of MB to GB
+
+#Models Comparison:
+ResNet: very popular, solves vanishing gradient(problem in deep networks. during training- model learns using gradients, in deep networks gradients become very small, early layers stop learning), high accuracy, best balance
+MobileNet: lightweight, fast, works on mobile, less accuracy
+EfficientNet: newer model, best accuracy, optimized scaling, very powerful, slightly complex
+---for our project recommended ResNet50, if advanced project EfficientNet
+4. VGG16 / VGG19:older CNN models, simple architecture, widely used in papers, good for baseline comparison
+5. DenseNet: each layer connects to all previous layers, betterfeature reuse,better accuracy, less parameters, used in research- often outperforms VGG/ResNet in medical imaging
+
+| Model        | Pros             | Cons                    |
+| ------------ | ---------------- | ----------------------- |
+| ResNet       | stable, popular  | slightly less efficient |
+| DenseNet     | better accuracy  | complex                 |
+| EfficientNet | best performance | harder                  |
+| MobileNet    | fast             | less accuracy           |
+
+For this project:
+ResNet50 → safest choice
+DenseNet → good but slightly complex
+EfficientNet → best if done properly
+
+suggested:Use ResNet50, compare with DenseNet or EfficientNet
+
+#Ideas to make project stand out:
+Two-stage model(very strong) - stage1->detect cancer(anomaly detection)  stage-2-> classify cancer type      ex: normal, benign(non-cancerous), malignant(cancerous)
+Add Explainable AI(very impressive) - use Grad-CAM(Gradient-weighted Class Activation Mapping-shows which part of image the model is focusing on), it shows where model is looking in the image, that is very important in medical ai. it is important because in medical field doctors need explaination not just prediction
+Patch + Attention mechanism - improve model by focusing on important regions, ignoring noises
+compare multiple models - CNN vs ResNet vs EfficientNet, then show accuracy, loss, performance
+Real-time demo(huge advantange) - create simple web app, upload image-> detect cancer
+
+#Final recommended strategy:
+-best combination:
+Dataset → Camelyon17 (main) BreakHis/PatchCamelyon (support)
+Model → ResNet50
+Task → Cancer detection
+-add these to stand out:
+Grad-CAM (must)-explainable ai
+Model comparison (ResNet vs DenseNet/EfficientNet)
+-optional:
+Subtype classification
+ 
+#Final workflow:
+1. Download WSI dataset (Camelyon16)
+    - wsi(.tif)
+
+2. Split dataset at WSI level(split the wsi data--normal.tif and tumor.tif, not test.tif)
+   (Train: 70% / Validation: 15% / Test: 15%)[validation is like practice test, to ensure/ manage model so that it won't overfit]
+   [Important: Split BEFORE patch extraction to avoid data leakage]
+
+3. Label patches (tumor = 1 / normal = 0)
+   [Using annotations:
+    If patch overlaps tumor → tumor
+    Else → normal]
+Assign labels at slide level:
+This enables:
+-Weak supervision
+-Reduced manual effort
+
+4. Extract patches from WSI
+   (Recommended patch size: 224 × 224)[Context-Aware Techniques, Apply during      extraction: Overlapping patches, Larger patch size, Sliding window approach Purpose: Preserve spatial context, Avoid missing tumor boundaries
+
+5. Data cleaning & preprocessing
+Cleaning:
+-Remove blank patches (white regions)
+-Remove noisy / low-information patches[Filter using pixel intensity and thresholding]
+-Remove blurry patches
+Preprocessing:
+-Resize to 224×224
+-Normalize pixel values
+Data Augmentation
+Apply:
+-Rotation
+-Flipping
+-Brightness / contrast
+Purpose:
+-Improve generalization
+-Handle dataset variations
+
+6. Train multiple CNN models
+   (ResNet, DenseNet, EfficientNet)
+   [Important:
+    - Same dataset
+    - Same preprocessing
+    - Same training settings]
+Anomaly Detection
+Optionally integrate:
+-Train model to learn normal patterns
+-Detect deviations as tumor
+Purpose:
+-Reduce dependency on labels
+-Detect unseen abnormalities
+
+7. Evaluate all models using same metrics
+   [Metrics:
+    - Accuracy
+    - Precision
+    - Recall
+    - F1-score]
+
+8. Compare model performance
+   [Use:
+    - Comparison table
+    - Graphs (accuracy, loss)]
+
+9. Select best performing model
+
+10. Apply Grad-CAM on best model (Explainable AI)
+    [Visualize model decisions:
+     - Heatmap on image
+     - Highlights tumor regions
+     - Improves interpretability and trust]
+
+11. Deployment(web application)
+Build web app (Streamlit):
+Features:
+-Upload patch image
+-Display prediction
+-Show heatmap
+
+12. Chatbot Integration
+Answer user queries
+Explain:
+-Model prediction
+-Heatmap meaning
+-Project concepts
+
+13. Final Output & Results
+System provides:
+- Cancer Detection (Tumor / Normal)
+- Heatmap Visualization
+- Text Explanation
+- Chatbot Assistance
+
+#Tech Stack:
+-Language: Python(used for loading dataset, training models, visualization, evaluation)
+-Libraries: NumPy(handling arrays,numerical operations), Matplotlib(plotting graphs, visualizing images), h5py(for reading .h5 dataset)
+-Framework: PyTorch / TensorFlow  [build neural networks, train models, optimize weights]
+-Models: ResNet(solves vanishing gradient, very stable), DenseNet(reuses features, efficient learning), EfficientNet(best performance, optimized scaling)
+-Techniques: CNN(detects patterns like edges, textures, shapes), Model comparison(find best model, justify choice), Grad-CAM(shows tumor area)
+-Dataset: PatchCamelyon, (Later: Camelyon WSI)
+
+#Top 20 best papers to add:
+-tier 1- most important:
+A multi-patch-based deep learning model with VGG19 for breast cancer classification in the pathology images
+Patch-Based Breast Cancer Histopathological image classification using deep learning
+GROUPMIXER: Patch-Based group convolutional neural network for breast cancer detection from histopathological images
+Whole-slide-imaging Cancer Metastasis detection and localization with limited tumorous data
+Anomaly Detection of Breast Cancer using deep learning
+AI-based Anomaly Detection for Clinical-grade histopathological diagonostics
+A loss-based patch label denoising method for improving whole-slide image analysis using a convolutional neural network
+Overcoming the limitations of patch-based learning to detect cancer in whole slide images
+Two-Stage Convolutional Neural Network for breast cancer histology image classification
+Novel methodology for detecting and localizing cancer area in histopathological image based on overlapping patches
+-tier 2- important supporting:
+Deep Learning Applied for Histological diagnosis of breast cancer
+Deep Learning Approaches in Histopathology
+Deep Learning for Medical Image-based cancer diagnosis
+Ensemble Deep Learning-Based Imaging
+Evaluating Deep Learning Models for breast cancer classification: A Comparitive Study
+Recent Advances of Deep Learning for Computational Histopathology: Principles and applications.
+Deep Learning-based analysis of mammographic images for breast cancer detection using transfer learning
+-tier 3 - less important, optional:
+Breast Cancer Classification from Histopathological images using patch-based deep learning modeling
+Classification of Breast Cancer Histology images using multi-size and discriminative patches based on deep learning
+Detection of breast cancer using deep learning techniques
+
+#github project links:
+BleeGleeWee Histopathology Image Classification
+Project Overview:
+-Uses CNN (ResNet50) for classification
+-Works on PatchCamelyon (PCam) dataset
+-Includes Grad-CAM visualization
+-Has Streamlit web app (app.py)
+Goal: Classify patches → tumor / normal
+Limitations:
+-Uses only patch dataset
+-No WSI processing
+   -No patch extraction step
+link:https://github.com/BleeGleeWee/Histopathology-Image-Classification
+2. apresland Histopathologic Cancer Detection
+Project Overview
+	-Binary classifier for metastasis detection
+	-Uses PCam dataset (220K patches)
+	-Explains H&E staining (medical context)
+	 Focus: Detect tumor in small patches
+	Limitations
+	- Only patch-based
+	- No deep pipeline
+	- No WSI handling
+3. p-georgiadis / similar Kaggle solutions
+Project Overview
+	-Built for Kaggle competition
+Uses:
+	-Xception
+	-MobileNetV2
+	-Transfer learning
+ Goal: Improve classification accuracy
+Limitations
+- Competition-focused
+- No real pipeline
+- No explainability
+4. aaryapatel007 Histopathological Cancer Detection
+Project Overview
+-Patch-based cancer detection
+-Uses transfer learning
+-Focus on classification
+Limitations
+- No WSI
+- No explainability
+- No full pipeline
+5. DIAGNijmegen pathology whole slide data
+Project Overview
+ This is a research-level WSI library
+Handles Whole Slide Images (WSI)
+Provides:
+-Patch extraction
+-Batch iterator
+-Sampling strategies
+ Designed for real-world pathology systems
+Limitations
+- Complex
+- Not beginner-friendly
+
+“Existing GitHub implementations focus only on patch-level classification, whereas our project builds a complete pipeline from WSI to patch extraction, training, and explainable prediction.” “Existing implementations primarily focus on patch-level classification using pre-extracted datasets. In contrast, our project develops a complete pipeline starting from Whole Slide Images (WSI), incorporating patch extraction, weak supervision, and explainable AI for more realistic and scalable cancer detection.”
+
+#research gaps and their possible solutions:
+Gap 1: Dependency on Fully Labeled Patch-Level Data(most models rely heavily on fully labeled patch-level data, requires manual annotation by medical experts and time-consuming and expensive)      --- solution:weakly supervised learning approach, labeling is done at wsi level,thereby reducing dependency on detailed annotations.
+Gap 2: Lack of Anomaly Detection Approaches(existing methods focus on supervised classification techniques, limited in detecting unseen/rare cancer patters, require large labeled datasets.)       ---solution:anomaly detection techniques, model learns normal tissue patterns, identifies deviations as potential cancerous regions, reducing need for extensive labeled data
+Gap 3: Loss of Global Context in Patch-Based Methods(patch-based models process small image regions, leading to loss of global contextual info, resulting in misclassification, especially in complex tissue structures)       ---solution:context-aware techniques such as overlapping patches, larger patch sizes, and aggregation of patch-level predictions to preserve spatial relationships and improve classification accuracy.
+Gap 4: Poor Generalization Across Datasets(Models trained on a specific dataset often fail to generalize well to other datasets due to variations in staining, resolution, and imaging conditions.)      ---solution:data augmentation techniques such as rotation, flipping, brightness adjustment and normalization methods can be enabled.
+Gap 5: Lack of Explainability in Deep Learning Models(models often acts as black boxes, pridictions without explaination, reduces trust and reliability in clinical applications.)     ---solution:Explainable AI techniques such as Grad-CAM, which generate heatmaps highlighting important regions in the image.
+
+#problem statement:
+Existing deep learning models for histopathology analysis depend on extensive labeled data, lack contextual understanding, generalize poorly across datasets, and do not provide explainable results. This creates a need for a robust and efficient system that reduces labeling dependency, improves contextual learning, enhances generalization, and provides interpretable outputs.
+
+#Types of Abnormalities:
+1. Nuclear Atypia
+✔ Irregular nucleus shape
+✔ Enlarged nuclei
+✔ Dark staining (hyperchromasia)
+2. Tumor Cell Density
+✔ Dense clusters of abnormal cells
+✔ Loss of normal spacing
+3. Mitotic Activity
+✔ Cells dividing rapidly
+✔ Visible mitotic figures
+4. Structural Distortion (Tissue Architecture)
+✔ Irregular ducts
+✔ Broken gland structures
+5. Necrosis (OPTIONAL but GOOD)
+✔ Dead tissue regions
+✔ Pale / irregular areas
+
+
+#Methodology:
+1.Data Collection:(WSI)-gigapixels(cannot be directly used for training the modeel)
+-we collect data from publicly available datasets such as TCGA(.SVS) and CAMELYON16(.tif).
+-Using only one dataset can lead to overfitting, whereas multiple datasets improve robustness.
+-tumor and normal samples
+-abnormalities are not explicitly labeled. The model learns them implicitly through feature extraction.
+2.Data Preprocessing:
+-patch extraction:We divide each Whole Slide Image into smaller patches of size 224×224(standard input size for CNN models like imagenet, Large enough to capture: Cells, Tissue patterns.  Small enough to: Process efficiently)  using a sliding window approach. we need overlapping patch images, so patch size will be given 224x224, Stride(step size) <224 gives overlapping patches. overlapping patches captures boundary regions, improves detection accuracy, reduces missed features.
+[sliding window working:Sliding window extracts fixed-size patches by moving across the image with a defined stride, ensuring full coverage of the WSI.]
+-remove non informative patches:We remove empty or background patches using thresholding, so that the model focuses only on meaningful tissue regions. thresholding- steps- Convert patch to grayscale, Calculate average pixel intensity, Compare with threshold. condition-If > 80% pixels are white → remove patch , other methods-Otsu thresholding,  HSV color filtering, Morphological filtering
+-noise reduction:We apply Gaussian blur to reduce noise while preserving important structures in the tissue. noise-Unwanted variations in image like scanner noise, staining variations, small pixel disturbances, ex:random dots, uneven color   , guassian blur-Smooths the image by averaging neighboring pixels, Each pixel = weighted average of neighbors, Nearby pixels → higher weight    , other methods-Median filter (can remove edges ❌), Bilateral filter (slow ❌)
+-resizing and normalization:All patches are resized to a uniform size(224x224) and normalized to improve model performance. normalization-required for transfer learning. types:min-max scaling(converts to 0-1), mean-std normalization(formula:(pixel - mean) / std)), imagenet values-mean = [0.485, 0.456, 0.406] std  = [0.229, 0.224, 0.225]
+-data augmentation:We apply augmentation techniques such as flipping, rotation, and zooming to increase dataset diversity, improve generalization and prevent overfitting.
+3.Model Development:
+-transfer learning:We use a pre-trained EfficientNet model trained on ImageNet and fine-tune it on our dataset. This reduces training time and improves performance.
+-feature extraction:The model automatically extracts important features such as cell shape, texture, and structural patterns. This is done internally by convolutional layers. convolutional layers-A convolutional layer extracts features from an image by applying filters that scan across the image and generate feature maps representing important patterns such as edges, textures, and shapes.  EfficientNet uses MBConv blocks, which consist of expansion, depthwise convolution, squeeze-and-excitation, and projection layers. These blocks efficiently extract features while maintaining high accuracy with fewer parameters.
+-classification:The model classifies each patch as either tumor or normal.
+4.Anomaly And Risk Analysis:
+-anomaly detection:The model identifies abnormalities such as nuclear atypia, increased cell density, mitotic activity, and tissue distortion.
+-anomaly scoring:Each patch is assigned a probability score indicating how likely it is to be cancerous.Assigning a score to each patch
+0 → Normal
+1 → Tumor
+Example:
+0.2 → Low anomaly
+0.8 → High anomaly
+formula--Softmax / Sigmoid output
+-risk prediction:Based on this probability, we categorize risk into three levels:
+Low risk, Medium risk, High risk
+5.Model Comparison:
+-evaluation metrics:We evaluate the models using standard metrics including:
+Accuracy-Correct predictions / total
+Precision-Out of predicted tumors, how many are correct
+Recall-Out of actual tumors, how many detected
+F1-score-Balance of precision & recall . formula:F1 = 2 × (Precision × Recall) / (Precision + Recall)  F1 score is a measure that combines precision and recall into a single value.
+-model selection:The best-performing model is selected based on these metrics.
+6.Output:
+-prediction:The model predicts whether the tissue is tumor or normal.
+-risk level:It also provides risk classification such as low, medium, or high.
+-heatmap visualization:We use Grad-CAM to generate heatmaps that highlight important regions in the image.(how grad cam works?- uses gradients from CNN and highlights influential areas
+-deployment:The system can be deployed as a web application or API for real-world use.

@@ -1,0 +1,65 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Large WSI / pathology data
+*.tif
+*.tiff
+*.svs
+*.ndpi
+*.mrxs
+*.scn
+*.vms
+*.vmu
+
+# Extracted image patches
+data/PATCHES/**/*.png
+data/PATCHES/**/*.jpg
+data/PATCHES/**/*.jpeg
+
+# Model weights / checkpoints
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.ckpt
+*.onnx
+models/
+checkpoints/
+
+# Training outputs
+runs/
+logs/
+tensorboard/
+wandb/
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
