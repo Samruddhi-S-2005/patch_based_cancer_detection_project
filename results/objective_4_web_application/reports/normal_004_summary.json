@@ -1,0 +1,9 @@
+{
+    "wsi_id": "normal_004",
+    "total_patches": 272,
+    "tumor_patches": 4,
+    "tumor_fraction_percent": 1.47,
+    "wsi_diagnosis": "MALIGNANT",
+    "dominant_anomaly": "Tumor Necrosis / Debris",
+    "heatmap_file": "normal_004_reconstructed_diagnostic_heatmap.png"
+}

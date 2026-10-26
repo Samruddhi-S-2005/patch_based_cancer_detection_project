@@ -1,0 +1,5 @@
+task,dataset,test_samples,test_positives,test_negatives,optimal_threshold,roc_auc,pr_auc,f1_at_optimal_tau,f1_at_0.50,balanced_accuracy,sensitivity,specificity,precision,true_negatives,false_positives,false_negatives,true_positives
+atypia,MITOS-ATYPIA14 (Severe Nuclear Pleomorphism),924,132,792,0.05,0.9569,0.779,0.6432,0.7068,0.8977,0.9697,0.8258,0.4812,654,138,4,128
+ductal,BACH (Ductal/DCIS Proxy),2250,750,1500,0.4038,0.9462,0.9143,0.796,0.8153,0.8593,0.8973,0.8213,0.7152,1232,268,77,673
+density,NuCLS (High Tumor Density),699,243,456,0.5315,0.9794,0.9712,0.8934,0.8942,0.9217,0.9136,0.9298,0.874,424,32,21,222
+necrosis,BCSS (Necrosis/Debris),2333,1133,1200,0.2715,0.9162,0.8989,0.8461,0.8392,0.8412,0.91,0.7725,0.7906,927,273,102,1031

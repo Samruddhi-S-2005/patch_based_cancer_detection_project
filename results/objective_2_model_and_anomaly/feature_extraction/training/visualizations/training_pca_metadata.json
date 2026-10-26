@@ -1,0 +1,42 @@
+{
+  "EfficientNet-B0": {
+    "model_name": "EfficientNet-B0",
+    "plot_path": "results/objective_2_model_and_anomaly/feature_extraction/training/visualizations/efficientnet_b0_training_pca_scatter.png",
+    "pc1_variance": 0.0629,
+    "pc2_variance": 0.0529,
+    "total_explained_variance": 0.1158,
+    "total_samples": 14719,
+    "normal_count": 6353,
+    "tumor_count": 8366
+  },
+  "ResNet-50": {
+    "model_name": "ResNet-50",
+    "plot_path": "results/objective_2_model_and_anomaly/feature_extraction/training/visualizations/resnet_50_training_pca_scatter.png",
+    "pc1_variance": 0.0814,
+    "pc2_variance": 0.0666,
+    "total_explained_variance": 0.1479,
+    "total_samples": 14719,
+    "normal_count": 6353,
+    "tumor_count": 8366
+  },
+  "DenseNet-121": {
+    "model_name": "DenseNet-121",
+    "plot_path": "results/objective_2_model_and_anomaly/feature_extraction/training/visualizations/densenet_121_training_pca_scatter.png",
+    "pc1_variance": 0.0808,
+    "pc2_variance": 0.0743,
+    "total_explained_variance": 0.1551,
+    "total_samples": 14719,
+    "normal_count": 6353,
+    "tumor_count": 8366
+  },
+  "VGG-16": {
+    "model_name": "VGG-16",
+    "plot_path": "results/objective_2_model_and_anomaly/feature_extraction/training/visualizations/vgg_16_training_pca_scatter.png",
+    "pc1_variance": 0.7539,
+    "pc2_variance": 0.2181,
+    "total_explained_variance": 0.972,
+    "total_samples": 14719,
+    "normal_count": 6353,
+    "tumor_count": 8366
+  }
+}

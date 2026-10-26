@@ -1,0 +1,48 @@
+TASK: ATYPIA (MITOS-ATYPIA14 (Severe Nuclear Pleomorphism))
+Optimal Threshold: 0.0500
+                          precision    recall  f1-score   support
+
+mild_mod_atypia_score1_2     0.9939    0.8258    0.9021       792
+    severe_atypia_score3     0.4812    0.9697    0.6432       132
+
+                accuracy                         0.8463       924
+               macro avg     0.7376    0.8977    0.7726       924
+            weighted avg     0.9207    0.8463    0.8651       924
+
+======================================================================
+TASK: DUCTAL (BACH (Ductal/DCIS Proxy))
+Optimal Threshold: 0.4038
+                           precision    recall  f1-score   support
+
+         non_ductal_proxy     0.9412    0.8213    0.8772      1500
+ductal_architecture_proxy     0.7152    0.8973    0.7960       750
+
+                 accuracy                         0.8467      2250
+                macro avg     0.8282    0.8593    0.8366      2250
+             weighted avg     0.8658    0.8467    0.8501      2250
+
+======================================================================
+TASK: DENSITY (NuCLS (High Tumor Density))
+Optimal Threshold: 0.5315
+                    precision    recall  f1-score   support
+
+   no_tumor_nuclei     0.9528    0.9298    0.9412       456
+high_tumor_density     0.8740    0.9136    0.8934       243
+
+          accuracy                         0.9242       699
+         macro avg     0.9134    0.9217    0.9173       699
+      weighted avg     0.9254    0.9242    0.9246       699
+
+======================================================================
+TASK: NECROSIS (BCSS (Necrosis/Debris))
+Optimal Threshold: 0.2715
+              precision    recall  f1-score   support
+
+non_necrosis     0.9009    0.7725    0.8318      1200
+    necrosis     0.7906    0.9100    0.8461      1133
+
+    accuracy                         0.8393      2333
+   macro avg     0.8458    0.8412    0.8389      2333
+weighted avg     0.8473    0.8393    0.8387      2333
+
+======================================================================

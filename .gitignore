@@ -1,31 +1,51 @@
-﻿# Python
+# ==============================================================================
+# PathoVision AI - Git Ignore Policy
+# Excludes virtual environments, machine caches, large binary datasets,
+# heavy model checkpoints, user session data, and local research archives.
+# All excluded items are preserved locally on disk and documented in README.md.
+# ==============================================================================
+
+# Python bytecode & cache
 __pycache__/
 *.py[cod]
+*$py.class
 *.pyo
+*.pyd
 
-# Virtual environment
+# Virtual Environments
 .venv/
 venv/
 env/
+ENV/
+env.bak/
+venv.bak/
 
-# Jupyter
+# Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# IDE
+# IDE configurations
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 
-# Python tooling
+# Testing & Linting caches
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+htmlcov/
 
-# Environment / secrets
+# Local Environment Variables & Secrets
 .env
 .env.*
 !.env.example
 
-# Large WSI / pathology data
+# Runtime User Session & Auth Database (Preserved locally, excluded from public git)
+data/auth/users.json
+data/user_data/
+
+# Raw Histopathology Whole Slide Images (WSIs) & Large Binary Scans (>25 GB)
 *.tif
 *.tiff
 *.svs
@@ -34,32 +54,58 @@ env/
 *.scn
 *.vms
 *.vmu
+data/RAW/
+data/ANOMALIES/
+data/External_test/
+data/MASKS/
+data/sample_wsi/
 
-# Extracted image patches
+# Bulk Extracted Image Patches (>1.6 GB)
 data/PATCHES/**/*.png
 data/PATCHES/**/*.jpg
 data/PATCHES/**/*.jpeg
 
-# Model weights / checkpoints
-*.h5
-*.hdf5
+# Model Weights & Binary Checkpoints (40 MB to 1.5 GB per file)
 *.pt
 *.pth
+*.h5
+*.hdf5
 *.ckpt
 *.onnx
 models/
 checkpoints/
+result/**/checkpoints/
 
-# Training outputs
+# High-Dimensional Embeddings & Matrix Caches (>50 MB to 230 MB)
+*.npy
+*.npz
+
+# Training & Profiling Logs
 runs/
 logs/
 tensorboard/
 wandb/
+*.log
 
-# Temporary files
+# Generated Heatmaps & Dynamic Diagnostics Cache (Runtime artifacts)
+result/
+results/**/*.npy
+results/**/*.npz
+
+# Local Development Backups & Audit Archives (Preserved locally)
+backups/
+project_audit/
+research_archive/
+related/
+CrowdsourcingDataset-Amgadetal2019/
+
+# OS and Temporary Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 *.tmp
 *.temp
-
-# OS files
-.DS_Store
-Thumbs.db

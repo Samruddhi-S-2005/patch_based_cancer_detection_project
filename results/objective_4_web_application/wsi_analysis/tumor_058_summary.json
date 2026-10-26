@@ -1,0 +1,9 @@
+{
+    "wsi_id": "tumor_058",
+    "total_patches": 251,
+    "tumor_patches": 76,
+    "tumor_fraction_percent": 30.28,
+    "wsi_diagnosis": "MALIGNANT",
+    "dominant_anomaly": "Ductal Structure Distortion",
+    "heatmap_file": "tumor_058_reconstructed_diagnostic_heatmap.png"
+}

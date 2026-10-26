@@ -1,0 +1,42 @@
+{
+  "optimal_thresholds": {
+    "ductal": 0.40379902720451355,
+    "density": 0.5314773321151733,
+    "necrosis": 0.27145883440971375,
+    "atypia": 0.05
+  },
+  "tasks": {
+    "ductal": {
+      "best_epoch": 30,
+      "val_pr_auc": 0.8002592281303625,
+      "val_roc_auc": 0.878910222222222,
+      "optimal_threshold": 0.40379902720451355,
+      "val_f1_at_optimal_threshold": 0.7096774193548387,
+      "val_f1_at_0.50_threshold": 0.7013801756587202
+    },
+    "density": {
+      "best_epoch": 6,
+      "val_pr_auc": 0.9737548345437449,
+      "val_roc_auc": 0.9785720749253461,
+      "optimal_threshold": 0.5314773321151733,
+      "val_f1_at_optimal_threshold": 0.929384965831435,
+      "val_f1_at_0.50_threshold": 0.9276018099547512
+    },
+    "necrosis": {
+      "best_epoch": 9,
+      "val_pr_auc": 0.9320191863573241,
+      "val_roc_auc": 0.9176873366250362,
+      "optimal_threshold": 0.27145883440971375,
+      "val_f1_at_optimal_threshold": 0.8448139350752177,
+      "val_f1_at_0.50_threshold": 0.8069087688219664
+    },
+    "atypia": {
+      "best_epoch": 29,
+      "val_pr_auc": 0.3104434125422383,
+      "val_roc_auc": 0.8134852310988674,
+      "optimal_threshold": 0.05,
+      "val_f1_at_optimal_threshold": 0.43243243243243246,
+      "val_f1_at_0.50_threshold": 0.30962343096234307
+    }
+  }
+}

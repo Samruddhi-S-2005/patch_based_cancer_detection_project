@@ -1,0 +1,41 @@
+{
+  "dataset": "CAMELYON16 Held-Out Test Split",
+  "sample_size": 200,
+  "normal_count": 100,
+  "tumor_count": 100,
+  "extraction_date": "2026-10-20T17:16:14.954679",
+  "architectures": {
+    "EfficientNet-B0": {
+      "embedding_dimension": 1280,
+      "pre_classifier_layer": "backbone.features -> avgpool -> flatten",
+      "pca_pc1_variance": 0.0961,
+      "pca_pc2_variance": 0.0597,
+      "total_explained_variance_2d": 0.1558,
+      "embedding_file": "efficientnet_b0_embeddings.npy"
+    },
+    "ResNet-50": {
+      "embedding_dimension": 2048,
+      "pre_classifier_layer": "backbone.layer4 -> avgpool -> flatten",
+      "pca_pc1_variance": 0.1216,
+      "pca_pc2_variance": 0.0742,
+      "total_explained_variance_2d": 0.1958,
+      "embedding_file": "resnet_50_embeddings.npy"
+    },
+    "DenseNet-121": {
+      "embedding_dimension": 1024,
+      "pre_classifier_layer": "backbone.features.norm5 -> adaptive_avg_pool2d -> flatten",
+      "pca_pc1_variance": 0.1207,
+      "pca_pc2_variance": 0.0884,
+      "total_explained_variance_2d": 0.2091,
+      "embedding_file": "densenet_121_embeddings.npy"
+    },
+    "VGG-16": {
+      "embedding_dimension": 4096,
+      "pre_classifier_layer": "backbone.classifier[:6] (FC layer 6)",
+      "pca_pc1_variance": 0.7017,
+      "pca_pc2_variance": 0.2807,
+      "total_explained_variance_2d": 0.9824,
+      "embedding_file": "vgg_16_embeddings.npy"
+    }
+  }
+}

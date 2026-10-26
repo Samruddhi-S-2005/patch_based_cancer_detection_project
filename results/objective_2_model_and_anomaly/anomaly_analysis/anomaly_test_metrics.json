@@ -1,0 +1,94 @@
+{
+  "atypia": {
+    "roc_auc": 0.9569080961126415,
+    "pr_auc": 0.7789585144087979,
+    "optimal_threshold": 0.05,
+    "f1_at_optimal_threshold": 0.6432160804020101,
+    "f1_at_0.50_threshold": 0.706766917293233,
+    "balanced_accuracy": 0.8977272727272727,
+    "accuracy": 0.8463203463203464,
+    "sensitivity": 0.9696969696969697,
+    "specificity": 0.8257575757575758,
+    "precision": 0.48120300751879697,
+    "confusion_matrix": {
+      "true_negative": 654,
+      "false_positive": 138,
+      "false_negative": 4,
+      "true_positive": 128
+    },
+    "support": {
+      "total_samples": 924,
+      "positive_samples": 132,
+      "negative_samples": 792
+    }
+  },
+  "ductal": {
+    "roc_auc": 0.9462417777777778,
+    "pr_auc": 0.9143362285372323,
+    "optimal_threshold": 0.40379902720451355,
+    "f1_at_optimal_threshold": 0.7959787108219988,
+    "f1_at_0.50_threshold": 0.8153180975911056,
+    "balanced_accuracy": 0.8593333333333333,
+    "accuracy": 0.8466666666666667,
+    "sensitivity": 0.8973333333333333,
+    "specificity": 0.8213333333333334,
+    "precision": 0.7151965993623804,
+    "confusion_matrix": {
+      "true_negative": 1232,
+      "false_positive": 268,
+      "false_negative": 77,
+      "true_positive": 673
+    },
+    "support": {
+      "total_samples": 2250,
+      "positive_samples": 750,
+      "negative_samples": 1500
+    }
+  },
+  "density": {
+    "roc_auc": 0.979387769836113,
+    "pr_auc": 0.971165637521706,
+    "optimal_threshold": 0.5314773321151733,
+    "f1_at_optimal_threshold": 0.8933601609657947,
+    "f1_at_0.50_threshold": 0.8942115768463074,
+    "balanced_accuracy": 0.9217024041585444,
+    "accuracy": 0.9241773962804005,
+    "sensitivity": 0.9135802469135802,
+    "specificity": 0.9298245614035088,
+    "precision": 0.8740157480314961,
+    "confusion_matrix": {
+      "true_negative": 424,
+      "false_positive": 32,
+      "false_negative": 21,
+      "true_positive": 222
+    },
+    "support": {
+      "total_samples": 699,
+      "positive_samples": 243,
+      "negative_samples": 456
+    }
+  },
+  "necrosis": {
+    "roc_auc": 0.9162422771403355,
+    "pr_auc": 0.8989418077799924,
+    "optimal_threshold": 0.27145883440971375,
+    "f1_at_optimal_threshold": 0.8461222814936398,
+    "f1_at_0.50_threshold": 0.8392050587172538,
+    "balanced_accuracy": 0.8412367608120035,
+    "accuracy": 0.8392627518216889,
+    "sensitivity": 0.909973521624007,
+    "specificity": 0.7725,
+    "precision": 0.7906441717791411,
+    "confusion_matrix": {
+      "true_negative": 927,
+      "false_positive": 273,
+      "false_negative": 102,
+      "true_positive": 1031
+    },
+    "support": {
+      "total_samples": 2333,
+      "positive_samples": 1133,
+      "negative_samples": 1200
+    }
+  }
+}
