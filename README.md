@@ -312,18 +312,19 @@ All training and evaluation pipelines use documented entry points:
 ### 1. Train Primary CNN Backbones
 To train an architecture from scratch or fine-tune with transfer learning:
 ```bash
-# Train EfficientNet-B0 (Primary Model)
-python src/objective_2/train.py --arch efficientnet_b0 --epochs 25 --batch_size 32 --lr 1e-4
+# Train EfficientNet-B0 (Primary Screening Model)
+python src/objective_2/train.py --arch efficientnet
 
 # Train DenseNet-121 Benchmark
-python src/objective_2/train.py --arch densenet121 --epochs 25 --batch_size 32 --lr 1e-4
+python src/objective_2/train.py --arch densenet
 
 # Train ResNet-50 Benchmark
-python src/objective_2/train.py --arch resnet50 --epochs 25 --batch_size 32 --lr 1e-4
+python src/objective_2/train.py --arch resnet
 
 # Train VGG-16 Benchmark
-python src/objective_2/train.py --arch vgg16 --epochs 25 --batch_size 16 --lr 5e-5
+python src/objective_2/train.py --arch vgg
 ```
+*(Hyperparameters such as epochs, batch sizes, learning rates, and early stopping patience are configured directly in the `CONFIG` dictionary in `src/objective_2/train.py`).*
 
 ### 2. Train Multi-Head Anomaly Linear Probing Heads
 Trains the three calibrated anomaly classifiers on frozen EfficientNet-B0 embeddings:

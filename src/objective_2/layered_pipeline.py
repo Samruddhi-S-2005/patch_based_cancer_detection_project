@@ -145,6 +145,8 @@ class LayeredDiagnosticPipeline:
         # 2. Initialize Anomaly Heads (Layer 3)
         # Note: Anomaly heads use the 1280-D frozen feature extractor from EfficientNet-B0
         eff_ckpt_path = MODEL_CHECKPOINTS.get("EfficientNet-B0", self.classifier_ckpt)
+        if not self.anomaly_ckpt.exists():
+            raise FileNotFoundError(f"Anomaly model checkpoint not found: {self.anomaly_ckpt}")
         print(f"[INIT] Loading Multi-Head Anomaly Profiler: {self.anomaly_ckpt.name}...")
         self.anomaly_model = EfficientNetB0MultiHeadAnomaly(
             checkpoint_path=eff_ckpt_path,

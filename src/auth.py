@@ -30,7 +30,7 @@ USERS_FILE = AUTH_DIR / "users.json"
 USER_DATA_ROOT = PROJECT_ROOT / "data" / "user_data"
 
 # Master authorization secret required to register as an Authorized Reviewer
-REVIEWER_REGISTRATION_KEY = "PATHOVISION_REVIEW_SECRET_2026"
+REVIEWER_REGISTRATION_KEY = os.environ.get("PATHOVISION_REVIEW_SECRET", os.environ.get("REVIEWER_SECRET", "PATHOVISION_REVIEW_SECRET_2026"))
 
 ROLES = {
     "demo": {
@@ -220,7 +220,7 @@ def register_user(
 
     # Enforce strict RBAC: self-registration cannot elevate to reviewer
     if role == "reviewer":
-        expected_secret = os.environ.get("REVIEWER_SECRET", REVIEWER_REGISTRATION_KEY)
+        expected_secret = os.environ.get("PATHOVISION_REVIEW_SECRET", os.environ.get("REVIEWER_SECRET", REVIEWER_REGISTRATION_KEY))
         if not admin_auth_key or not hmac.compare_digest(admin_auth_key, expected_secret):
             return False, "Reviewer privileges cannot be self-assigned. Institutional approval required."
     else:
